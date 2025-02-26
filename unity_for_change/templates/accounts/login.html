@@ -1,0 +1,13 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+    <div class="card mx-auto mt-5" style="max-width: 400px;">
+        <div class="card-body">
+            <h3 class="card-title text-center">Login</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

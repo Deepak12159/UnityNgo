@@ -1,0 +1,13 @@
+1. install python 
+2. open terminal and paste >> pip install virtualenv 
+3. open terminal inside project folder >> venv/Scripts/activate
+4. cd unity_for_change 
+5. python manage.py runserver
+
+
+if you want to access administrative privilages then add '/admin' after the url
+username : UnityAdmin
+passwd: Unity123@
+
+
+Enjoy 😎

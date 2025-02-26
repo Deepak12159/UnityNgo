@@ -1,0 +1,54 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+    <h2>Orphan Kids List</h2>
+    <a href="{% url 'orphan_create' %}" class="btn btn-success">Add New</a>
+    
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Description</th>
+                <th>Actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for orphan in orphans %}
+            <tr class="orphan-row">
+                <td>{{ orphan.name }}</td>
+                <td>{{ orphan.age }}</td>
+                <td>{{ orphan.description }}</td>
+                <td>
+                    <a href="{% url 'orphan_update' orphan.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <button class="btn btn-danger btn-sm delete-btn" data-id="{{ orphan.id }}">Delete</button>
+                </td>
+                <td><img src="{{ orphan.image.url }}" alt="Orphan Image" width="100"></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Change background color on hover
+        document.querySelectorAll(".orphan-row").forEach(row => {
+            row.addEventListener("mouseover", function() {
+                this.style.backgroundColor = "#f8d7da";
+            });
+            row.addEventListener("mouseout", function() {
+                this.style.backgroundColor = "";
+            });
+        });
+
+        // Confirm before deleting
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                let orphanId = this.getAttribute("data-id");
+                if (confirm("Are you sure you want to delete this entry?")) {
+                    window.location.href = `/orphans/delete/${orphanId}/`;
+                }
+            });
+        });
+    </script>
+{% endblock %}
